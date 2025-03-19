@@ -3,10 +3,12 @@ info:
   title: River Discharge API
   description: API for River Forecast System data
   version: 3.0.0
+servers:
+  - url: https://api.riverforecastsystem.com
 paths:
   /v2/forecast/{summary}/{river_id}:
     get:
-      summary: Get forecasted river discharge
+      summary: Get forecasted river discharge for a specified river.
       parameters:
         - name: summary
           in: path
@@ -15,7 +17,7 @@ paths:
             type: string
             enum:
               - stats
-              - ensembles
+              - members
               - record
           description: The type of forecast data to retrieve.
         - name: river_id
