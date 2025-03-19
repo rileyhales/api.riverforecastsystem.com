@@ -1,0 +1,16 @@
+{
+  "resource": "/v2/resolution/{resolution}/{river_id}",
+  "path": "/v2/resolution/daily/140266377",
+  "httpMethod": "GET",
+  "pathParameters": {
+    "resolution": "daily",
+    "river_id": "140266377"
+  },
+  "headers": {
+    "Accept": "application/json"
+  },
+  "requestContext": {
+    "httpMethod": "GET",
+    "path": "/v2/resolution/daily"
+  }
+}

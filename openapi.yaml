@@ -1,0 +1,123 @@
+openapi: 3.0.1
+info:
+  title: River Discharge API
+  description: API for River Forecast System data
+  version: 3.0.0
+paths:
+  /v2/forecast/{summary}/{river_id}:
+    get:
+      summary: Get forecasted river discharge
+      parameters:
+        - name: summary
+          in: path
+          required: true
+          schema:
+            type: string
+            enum:
+              - stats
+              - ensembles
+              - record
+          description: The type of forecast data to retrieve.
+        - name: river_id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: The river ID for which to retrieve data.
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: Client error (invalid parameters)
+        '500':
+          description: Internal server error
+  /v2/retrospective/{resolution}/{river_id}:
+    get:
+      summary: Get retrospective simulation river discharge at a specified time step
+      parameters:
+        - name: resolution
+          in: path
+          required: true
+          schema:
+            type: string
+            enum:
+              - hourly
+              - daily
+              - monthly
+              - yearly
+              - maximums
+          description: The time step of the discharge data.
+        - name: river_id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: The river ID for which to retrieve data.
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: Client error (invalid parameters)
+        '500':
+          description: Internal server error
+  /v2/return_periods/{distribution}/{river_id}:
+    get:
+      summary: Get estimated return periods
+      parameters:
+        - name: distribution
+          in: path
+          required: true
+          schema:
+            type: string
+            enum:
+              - logpearson3
+              - gumbel
+        - name: river_id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: The river ID for which to retrieve data.
+      responses:
+        '200':
+          description: Successful response
+        '400':
+            description: Client error (invalid parameters)
+        '500':
+          description: Internal server error
+  /v2/fdc/{resolution}/{kind}/{river_id}:
+    get:
+      summary: Get an estimate of the flow duration curve based on a specified time step and grouping
+      parameters:
+        - name: resolution
+          in: path
+          required: true
+          schema:
+              type: string
+              enum:
+              - hourly
+              - daily
+              - monthly
+          description: The time step of the discharge data.
+        - name: kind
+          in: path
+          required: true
+          schema:
+              type: string
+              enum:
+              - total
+              - monthly
+          description: The grouping of the discharge data.
+        - name: river_id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: The river ID for which to retrieve data.
+      responses:
+        '200':
+          description: Successful response
+        '400':
+            description: Client error (invalid parameters)
+        '500':
+          description: Internal server error
